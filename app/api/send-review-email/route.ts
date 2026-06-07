@@ -1,3 +1,5 @@
+import { render } from "@react-email/render";
+import { createElement } from "react";
 import { Resend } from "resend";
 import ReviewEmail from "@/components/ReviewEmail";
 
@@ -86,23 +88,27 @@ export async function POST(request: Request) {
     validated.data;
   const resend = new Resend(resendApiKey);
 
-  // Email images are loaded from public/logo.png and public/logo_icon.png.
+  // Email images are loaded from public assets such as logo.png, google.png, and logos-checkatrade.png.
   // Set NEXT_PUBLIC_SITE_URL in production if request origin is not the public site URL.
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ||
     new URL(request.url).origin.replace(/\/$/, "");
 
   try {
-    const { error } = await resend.emails.send({
-      from: FROM_EMAIL,
-      to: customerEmail,
-      subject: SUBJECT,
-      react: ReviewEmail({
+    const emailHtml = await render(
+      createElement(ReviewEmail, {
         customerName,
         workCompleted,
         personalMessage,
         baseUrl,
       }),
+    );
+
+    const { error } = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: customerEmail,
+      subject: SUBJECT,
+      html: emailHtml,
     });
 
     if (error) {
