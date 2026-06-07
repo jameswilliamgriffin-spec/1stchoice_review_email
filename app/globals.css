@@ -4,6 +4,7 @@
   /* Change global app colours here when refreshing the brand palette. */
   --background: #f7f7f5;
   --foreground: #101010;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -11,13 +12,6 @@
   --color-foreground: var(--foreground);
   --font-sans: Arial, Helvetica, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #080808;
-    --foreground: #f8f8f8;
-  }
 }
 
 body {

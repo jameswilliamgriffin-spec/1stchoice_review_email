@@ -128,12 +128,12 @@ export default function Home() {
   }
 
   const inputClass =
-    "mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-[15px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition placeholder:text-zinc-400 focus:border-red-400 focus:ring-4 focus:ring-red-500/10 dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:placeholder:text-zinc-500";
+    "mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-[15px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition placeholder:text-zinc-400 focus:border-red-400 focus:ring-4 focus:ring-red-500/10";
 
   return (
-    <main className="min-h-screen bg-[#f7f7f5] text-zinc-950 dark:bg-[#101010] dark:text-zinc-50">
+    <main className="min-h-screen bg-[#f7f7f5] text-zinc-950">
       <div className="mx-auto flex min-h-screen w-full max-w-[1480px] flex-col px-4 py-4 sm:px-6 lg:px-8">
-        <header className="sticky top-4 z-20 rounded-[2rem] border border-zinc-200/80 bg-white/88 px-4 py-3 shadow-[0_16px_50px_rgba(20,20,20,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/80">
+        <header className="sticky top-4 z-20 rounded-[2rem] border border-zinc-200/80 bg-white/88 px-4 py-3 shadow-[0_16px_50px_rgba(20,20,20,0.06)] backdrop-blur-xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
               {/* Change the main app logo by replacing public/logo.png. */}
@@ -145,12 +145,12 @@ export default function Home() {
                 priority
                 className="h-auto w-48 sm:w-56"
               />
-              <div className="hidden h-8 w-px bg-zinc-200 dark:bg-white/10 sm:block" />
-              <p className="hidden text-[28px] font-semibold leading-[46px] text-zinc-950 dark:text-white md:block">
+              <div className="hidden h-8 w-px bg-zinc-200 sm:block" />
+              <p className="hidden text-[28px] font-semibold leading-[46px] text-zinc-950 md:block">
                 Review request platform
               </p>
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-600 dark:bg-white/8 dark:text-zinc-300">
+            <div className="flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-2 text-sm font-medium text-zinc-600">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
               Ready to send
             </div>
@@ -160,13 +160,13 @@ export default function Home() {
         <section className="grid flex-1 gap-8 py-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(560px,1.1fr)] lg:items-start lg:py-14">
           <div className="space-y-7">
             <div className="max-w-2xl">
-              <div className="mb-5 inline-flex rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm font-medium text-zinc-600 shadow-sm dark:border-white/10 dark:bg-white/[0.06] dark:text-zinc-300">
+              <div className="mb-5 inline-flex rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-sm font-medium text-zinc-600 shadow-sm">
                 Internal tool for 1st Choice Roofers
               </div>
-              <h1 className="text-5xl font-semibold leading-[1.02] tracking-normal text-zinc-950 dark:text-white sm:text-6xl">
+              <h1 className="text-5xl font-semibold leading-[1.02] tracking-normal text-zinc-950 sm:text-6xl">
                 Send review emails with ease
               </h1>
-              <p className="mt-5 max-w-2xl text-xl leading-9 text-zinc-600 dark:text-zinc-300">
+              <p className="mt-5 max-w-2xl text-xl leading-9 text-zinc-600">
                 Enter the customer details, refine the message, and preview a
                 branded email before sending it securely through Resend.
               </p>
@@ -174,7 +174,7 @@ export default function Home() {
 
             <form
               onSubmit={handleSubmit}
-              className="rounded-[2rem] border border-zinc-200/80 bg-white p-5 shadow-[0_22px_70px_rgba(20,20,20,0.08)] dark:border-white/10 dark:bg-zinc-950 sm:p-7"
+              className="rounded-[2rem] border border-zinc-200/80 bg-white p-5 shadow-[0_22px_70px_rgba(20,20,20,0.08)] sm:p-7"
             >
               <div className="mb-8 flex items-start justify-between gap-8">
                 <div>
@@ -196,7 +196,7 @@ export default function Home() {
 
               <div className="grid gap-5">
                 <label className="block">
-                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                  <span className="text-sm font-medium text-zinc-700">
                     Customer Name
                   </span>
                   <input
@@ -216,7 +216,7 @@ export default function Home() {
                 </label>
 
                 <label className="block">
-                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                  <span className="text-sm font-medium text-zinc-700">
                     Customer Email Address
                   </span>
                   <input
@@ -237,7 +237,7 @@ export default function Home() {
                 </label>
 
                 <label className="block">
-                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                  <span className="text-sm font-medium text-zinc-700">
                     Type of Work Completed
                   </span>
                   <input
@@ -256,7 +256,7 @@ export default function Home() {
                 </label>
 
                 <label className="block">
-                  <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                  <span className="text-sm font-medium text-zinc-700">
                     Optional Personal Message
                   </span>
                   <textarea
@@ -267,7 +267,7 @@ export default function Home() {
                     }
                     placeholder="It was a pleasure working with you, Sophie. The team really enjoyed it."
                   />
-                  <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="mt-2 text-sm text-zinc-500">
                     This appears above the review buttons.
                   </p>
                 </label>
@@ -316,8 +316,8 @@ export default function Home() {
                 <div
                   className={`mt-5 rounded-2xl border px-4 py-3 text-sm font-medium ${
                     status.type === "success"
-                      ? "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-500/10 dark:text-emerald-200"
-                      : "border-red-200 bg-red-50 text-red-800 dark:border-red-400/20 dark:bg-red-500/10 dark:text-red-200"
+                      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                      : "border-red-200 bg-red-50 text-red-800"
                   }`}
                   role="status"
                 >
@@ -328,23 +328,23 @@ export default function Home() {
           </div>
 
           <aside className="lg:sticky lg:top-28">
-            <div className="rounded-[2rem] border border-zinc-200/80 bg-white p-3 shadow-[0_24px_80px_rgba(20,20,20,0.08)] dark:border-white/10 dark:bg-zinc-950 sm:p-4">
+            <div className="rounded-[2rem] border border-zinc-200/80 bg-white p-3 shadow-[0_24px_80px_rgba(20,20,20,0.08)] sm:p-4">
               <div className="flex items-center justify-between px-3 py-3">
                 <div>
                   <p className="text-sm font-medium text-red-600">
                     Email preview
                   </p>
-                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-zinc-500">
                     {preview.customerEmail}
                   </p>
                 </div>
-                <span className="rounded-full bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-600 dark:bg-white/10 dark:text-zinc-300">
+                <span className="rounded-full bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-600">
                   Live
                 </span>
               </div>
 
-              <div className="overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-[#fbfbfa] dark:border-white/10 dark:bg-[#141414]">
-                <div className="flex items-center gap-2 border-b border-zinc-200 bg-white px-5 py-4 dark:border-white/10 dark:bg-zinc-950">
+              <div className="overflow-hidden rounded-[1.75rem] border border-zinc-200 bg-[#fbfbfa]">
+                <div className="flex items-center gap-2 border-b border-zinc-200 bg-white px-5 py-4">
                   <span className="h-3 w-3 rounded-full bg-red-400" />
                   <span className="h-3 w-3 rounded-full bg-amber-300" />
                   <span className="h-3 w-3 rounded-full bg-emerald-400" />
@@ -353,7 +353,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="border-b border-zinc-200 bg-white px-6 py-4 text-sm dark:border-white/10 dark:bg-zinc-950">
+                <div className="border-b border-zinc-200 bg-white px-6 py-4 text-sm">
                   <div className="grid gap-1 sm:grid-cols-[72px_1fr]">
                     <span className="text-zinc-400">From</span>
                     <span>1st Choice Roofers &lt;reviews@1stchoiceroofers.uk&gt;</span>
@@ -363,7 +363,7 @@ export default function Home() {
                 </div>
 
                 <div className="space-y-4 p-4 sm:p-6">
-                  <section className="rounded-[1.5rem] border border-zinc-200 bg-white p-7 text-center dark:border-white/10 dark:bg-zinc-950">
+                  <section className="rounded-[1.5rem] border border-zinc-200 bg-white p-7 text-center">
                     <Image
                       src="/logo.png"
                       alt="1st Choice Roofers"
@@ -375,28 +375,28 @@ export default function Home() {
                       Thank you for choosing{" "}
                       <span className="text-red-600">1st Choice Roofers</span>
                     </h3>
-                    <p className="mx-auto mt-5 max-w-md text-lg leading-8 text-zinc-700 dark:text-zinc-200">
+                    <p className="mx-auto mt-5 max-w-md text-lg leading-8 text-zinc-700">
                       Hi {preview.customerName}, thank you again for choosing
                       us. It was a pleasure helping with your{" "}
-                      <span className="font-medium text-zinc-950 dark:text-white">
+                      <span className="font-medium text-zinc-950">
                         {preview.workCompleted}
                       </span>
                       .
                     </p>
                   </section>
 
-                  <section className="rounded-[1.5rem] border border-zinc-200 bg-white p-6 text-center dark:border-white/10 dark:bg-zinc-950">
-                    <p className="mx-auto max-w-md text-base leading-7 text-zinc-700 dark:text-zinc-300">
+                  <section className="rounded-[1.5rem] border border-zinc-200 bg-white p-6 text-center">
+                    <p className="mx-auto max-w-md text-base leading-7 text-zinc-700">
                       {preview.personalMessage}
                     </p>
-                    <p className="mx-auto mt-5 max-w-md text-base leading-7 text-zinc-700 dark:text-zinc-300">
+                    <p className="mx-auto mt-5 max-w-md text-base leading-7 text-zinc-700">
                       As a family-run business, Google reviews make a huge
                       difference to us and help future customers feel confident
                       they are choosing a trusted roofing company.
                     </p>
                   </section>
 
-                  <section className="rounded-[1.5rem] border border-blue-100 bg-[#f3f8ff] p-7 text-center shadow-[0_18px_48px_rgba(21,93,252,0.08)] dark:border-blue-400/20 dark:bg-blue-500/10">
+                  <section className="rounded-[1.5rem] border border-blue-100 bg-[#f3f8ff] p-7 text-center shadow-[0_18px_48px_rgba(21,93,252,0.08)]">
                     <Image
                       src="/google.png"
                       alt="Google Reviews"
@@ -408,7 +408,7 @@ export default function Home() {
                     <h4 className="mx-auto mt-6 max-w-md text-3xl font-semibold leading-tight tracking-normal">
                       Help Other Homeowners Choose With Confidence
                     </h4>
-                    <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                    <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-zinc-600">
                       A small review helps local homeowners find a reliable
                       roofing team.
                     </p>
@@ -420,7 +420,7 @@ export default function Home() {
                     </a>
                   </section>
 
-                  <section className="rounded-[1.5rem] border border-zinc-200 bg-[#f8f8f6] p-6 text-center shadow-[0_14px_38px_rgba(23,23,23,0.05)] dark:border-white/10 dark:bg-zinc-950">
+                  <section className="rounded-[1.5rem] border border-zinc-200 bg-[#f8f8f6] p-6 text-center shadow-[0_14px_38px_rgba(23,23,23,0.05)]">
                     <Image
                       src="/logos-checkatrade.png"
                       alt="Checkatrade"
@@ -429,25 +429,25 @@ export default function Home() {
                       unoptimized
                       className="mx-auto h-auto w-48"
                     />
-                    <p className="mx-auto mt-1 max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-300">
-                      <span className="font-bold text-zinc-950 dark:text-white">
+                    <p className="mx-auto mt-1 max-w-md text-sm leading-6 text-zinc-600">
+                      <span className="font-bold text-zinc-950">
                         Already use Checkatrade?
                       </span>{" "}
                       We&apos;d be grateful for your feedback there too.
                     </p>
-                    <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                    <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-zinc-600">
                       Some homeowners prefer to read reviews on Checkatrade when
                       choosing a trusted local roofer.
                     </p>
                     <a
                       href={checkatradeUrl}
-                      className="mt-4 inline-flex rounded-2xl border border-zinc-300 bg-white px-6 py-3.5 text-center text-sm font-semibold text-zinc-800 shadow-sm transition hover:-translate-y-0.5 hover:border-red-300 hover:text-red-600 hover:shadow-md dark:border-white/15 dark:bg-white/5 dark:text-zinc-100"
+                      className="mt-4 inline-flex rounded-2xl border border-zinc-300 bg-white px-6 py-3.5 text-center text-sm font-semibold text-zinc-800 shadow-sm transition hover:-translate-y-0.5 hover:border-red-300 hover:text-red-600 hover:shadow-md"
                     >
                       Review us on Checkatrade
                     </a>
                   </section>
 
-                  <section className="border-t-2 border-red-600 bg-white px-6 py-8 text-center dark:bg-zinc-950">
+                  <section className="border-t-2 border-red-600 bg-white px-6 py-8 text-center">
                     <Image
                       src="/logo.png"
                       alt="1st Choice Roofers"
@@ -455,18 +455,18 @@ export default function Home() {
                       height={44}
                       className="mx-auto h-auto w-52"
                     />
-                    <div className="mt-6 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+                    <div className="mt-6 text-sm leading-6 text-zinc-500">
                       <p>Kind regards,</p>
-                      <p className="font-medium text-zinc-900 dark:text-white">
+                      <p className="font-medium text-zinc-900">
                         Richard &amp; the team
                       </p>
                       <p>1st Choice Roofers</p>
                     </div>
-                    <div className="mt-5 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+                    <div className="mt-5 text-sm leading-6 text-zinc-500">
                       <p>Birmingham: 0121 623 7200</p>
                       <p>info@1stchoiceroofers.uk</p>
                     </div>
-                    <p className="mt-5 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                    <p className="mt-5 text-xs font-medium text-zinc-500">
                       Fully insured • Family-run business • 30+ years
                       experience
                     </p>
