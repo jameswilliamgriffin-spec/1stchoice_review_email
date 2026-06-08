@@ -6,6 +6,7 @@ import { FormEvent, useMemo, useState } from "react";
 type FormValues = {
   customerName: string;
   customerEmail: string;
+  customerPhone: string;
   workCompleted: string;
   personalMessage: string;
 };
@@ -15,6 +16,7 @@ type FormErrors = Partial<Record<keyof FormValues, string>>;
 const initialValues: FormValues = {
   customerName: "",
   customerEmail: "",
+  customerPhone: "",
   workCompleted: "",
   personalMessage: "",
 };
@@ -26,6 +28,30 @@ const checkatradeUrl =
 
 function validateEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function formatUkWhatsAppNumber(phoneNumber: string) {
+  const digitsOnly = phoneNumber.replace(/\D/g, "");
+
+  if (!digitsOnly) {
+    return "";
+  }
+
+  // WhatsApp wa.me links need the international number with no plus sign.
+  // For UK numbers, remove the leading 0 and prefix 44, e.g. 07983 530914 -> 447983530914.
+  if (digitsOnly.startsWith("0")) {
+    return `44${digitsOnly.slice(1)}`;
+  }
+
+  if (digitsOnly.startsWith("44")) {
+    return digitsOnly;
+  }
+
+  return digitsOnly;
+}
+
+function validateUkWhatsAppNumber(phoneNumber: string) {
+  return /^44\d{10}$/.test(formatUkWhatsAppNumber(phoneNumber));
 }
 
 function validateForm(values: FormValues) {
@@ -65,6 +91,7 @@ export default function Home() {
         values.personalMessage.trim() ||
         "It was a pleasure working with you. The team really enjoyed it.",
       customerEmail: values.customerEmail.trim() || "sophie.hughes@email.com",
+      customerPhone: values.customerPhone.trim() || "07983 530914",
     }),
     [values],
   );
@@ -127,6 +154,60 @@ export default function Home() {
     }
   }
 
+  function handleOpenWhatsApp() {
+    const nextErrors: FormErrors = {};
+    const customerName = values.customerName.trim();
+    const whatsappNumber = formatUkWhatsAppNumber(values.customerPhone);
+
+    if (!customerName) {
+      nextErrors.customerName = "Enter the customer's name.";
+    }
+
+    if (!values.customerPhone.trim()) {
+      nextErrors.customerPhone = "Enter the customer's phone number.";
+    } else if (!validateUkWhatsAppNumber(values.customerPhone)) {
+      nextErrors.customerPhone =
+        "Enter a valid UK phone number, for example 07983 530914.";
+    }
+
+    setErrors((current) => ({
+      ...current,
+      customerName: undefined,
+      customerPhone: undefined,
+      ...nextErrors,
+    }));
+
+    if (Object.keys(nextErrors).length > 0) {
+      setStatus({
+        type: "error",
+        message: "Please add a valid customer name and phone number first.",
+      });
+      return;
+    }
+
+    const whatsappMessage = [
+      `Hi ${customerName}, thanks again for choosing 1st Choice Roofers. We really appreciate your business.`,
+      "",
+      "If you have a spare minute, would you mind leaving us a Google review? It makes a big difference to our family-run business and helps future customers choose a trusted roofer.",
+      "",
+      googleReviewUrl,
+      "",
+      "Thanks, Richard & the team",
+    ].join("\n");
+
+    // The message is encoded into the URL so WhatsApp opens with the text pre-filled.
+    // This is a manual customer contact flow: the user still reviews and sends it in WhatsApp.
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      whatsappMessage,
+    )}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setStatus({
+      type: "success",
+      message: `WhatsApp message opened for ${values.customerPhone.trim()}.`,
+    });
+  }
+
   const inputClass =
     "mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3.5 text-[15px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition placeholder:text-zinc-400 focus:border-red-400 focus:ring-4 focus:ring-red-500/10";
 
@@ -168,7 +249,8 @@ export default function Home() {
               </h1>
               <p className="mt-5 max-w-2xl text-xl leading-9 text-zinc-600">
                 Enter the customer details, refine the message, and preview a
-                branded email before sending it securely through Resend.
+                branded email before sending it securely through Resend, or
+                open a ready-to-send WhatsApp review message.
               </p>
             </div>
 
@@ -238,6 +320,27 @@ export default function Home() {
 
                 <label className="block">
                   <span className="text-sm font-medium text-zinc-700">
+                    Customer Phone Number
+                  </span>
+                  <input
+                    className={inputClass}
+                    value={values.customerPhone}
+                    onChange={(event) =>
+                      updateValue("customerPhone", event.target.value)
+                    }
+                    placeholder="07983 530914"
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
+                  {errors.customerPhone && (
+                    <p className="mt-2 text-sm font-medium text-red-600">
+                      {errors.customerPhone}
+                    </p>
+                  )}
+                </label>
+
+                <label className="block">
+                  <span className="text-sm font-medium text-zinc-700">
                     Type of Work Completed
                   </span>
                   <input
@@ -273,10 +376,10 @@ export default function Home() {
                 </label>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSending}
-                className="group mt-8 flex w-full items-center justify-center gap-3 rounded-2xl bg-red-600 px-6 py-4 text-base font-semibold text-white shadow-[0_16px_34px_rgba(220,38,38,0.20)] transition hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-[0_20px_44px_rgba(220,38,38,0.24)] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+            <button
+              type="submit"
+              disabled={isSending}
+              className="group mt-8 flex w-full items-center justify-center gap-3 rounded-2xl bg-red-600 px-6 py-4 text-base font-semibold text-white shadow-[0_16px_34px_rgba(220,38,38,0.20)] transition hover:-translate-y-0.5 hover:bg-red-700 hover:shadow-[0_20px_44px_rgba(220,38,38,0.24)] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
               >
                 {isSending ? "Sending..." : "Send Review Email"}
                 {isSending ? (
@@ -308,12 +411,70 @@ export default function Home() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                  </svg>
-                )}
+                </svg>
+              )}
+            </button>
+
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={handleOpenWhatsApp}
+                className="flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-800 shadow-[0_10px_24px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M8.8 17.9 5 19l1.1-3.5A7.2 7.2 0 1 1 8.8 17.9Z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                  />
+                  <path
+                    d="M9.2 9.2c.3 2.3 2.1 4.1 4.4 4.7l1.1-1.1 2.1.7c-.2 1.5-1.5 2.6-3 2.4-3.4-.4-6.1-3.1-6.5-6.5-.2-1.5.9-2.8 2.4-3l.7 2.1-1.2.7Z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+                Open WhatsApp Message
               </button>
 
-              {status.type !== "idle" && (
-                <div
+              <button
+                type="button"
+                className="flex items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-medium text-zinc-800 shadow-[0_10px_24px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-sky-200 hover:bg-sky-50 hover:text-sky-800"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M5.5 6.5h13a2.5 2.5 0 0 1 2.5 2.5v5.8a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3v-3H5.5A2.5 2.5 0 0 1 3 14.8V9a2.5 2.5 0 0 1 2.5-2.5Z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                  />
+                  <path
+                    d="M7.8 10.8h8.4M7.8 13.8h5.6"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeWidth="1.8"
+                  />
+                </svg>
+                Send SMS
+              </button>
+            </div>
+
+            {status.type !== "idle" && (
+              <div
                   className={`mt-5 rounded-2xl border px-4 py-3 text-sm font-medium ${
                     status.type === "success"
                       ? "border-emerald-200 bg-emerald-50 text-emerald-800"
